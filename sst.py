@@ -1,12 +1,23 @@
 #IMPORTS
 import speech_recognition as sr
-import pyttsx3
+from pydub import AudioSegment
+from pydub.silence import split_on_silence
+import numpy as np
+
+filename = "JIcut"
+
+from pydub import AudioSegment
 
 r = sr.Recognizer()
 
-AUDIO_FILE = "examples_english.wav"
-                                 
+AUDIO_FILE = f"{filename}.wav"
+
 with sr.AudioFile(AUDIO_FILE) as source:
+
         audio = r.record(source)  # read the entire audio file                  
 
-        print("Transcription: " + r.recognize_google(audio))
+        text = r.recognize_sphinx(audio)
+
+with open(f"{filename}.txt", 'w') as f:
+    f.write(text)
+
