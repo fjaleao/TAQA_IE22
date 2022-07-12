@@ -15,7 +15,7 @@ import tkinter
 from tkinter import messagebox
 from keywords import keywords
 
-from sst import transcript
+from transcript import transcript
 
 # Function for opening the
 # file explorer window
