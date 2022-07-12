@@ -2,7 +2,6 @@
 # a file explorer in Tkinter
 from asyncore import write
 import os
-from cupshelpers import missingExecutables
 import pandas
 
 # import all components
