@@ -43,9 +43,9 @@ def Go():
     trs = transcript(label_file_explorer.cget("text"), lang, 1)
 
     while(trs==None):
-        label_status(text="Status : Processing...")
+        label_status.config(text="Status : Processing...")
 
-    label_status(text="Status : Finished")
+    label_status.config(text="Status : Finished")
 
 
 
