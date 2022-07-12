@@ -1,10 +1,10 @@
 #IMPORTS
 import speech_recognition as sr
-from pydub import AudioSegment
-from pydub.silence import split_on_silence
+#from pydub import AudioSegment
+#from pydub.silence import split_on_silence
 import numpy as np
 
-filename = "JIcut"
+filename = "eng"
 
 from pydub import AudioSegment
 
@@ -17,6 +17,7 @@ with sr.AudioFile(AUDIO_FILE) as source:
         audio = r.record(source)  # read the entire audio file                  
 
         text = r.recognize_google(audio, language="en-US")
+        print(text)
 
 with open(f"{filename}.txt", 'w') as f:
     f.write(text)
