@@ -21,7 +21,6 @@ with sr.AudioFile(AUDIO_FILE) as source:
  
 df = pd.DataFrame({'mytext': [text]})
  
- 
 df["mytext_new"] = df['mytext'].str.lower().str.replace('[^\w\s]','')
 new_df = df.mytext_new.str.split(expand=True).stack().value_counts().reset_index()
  
