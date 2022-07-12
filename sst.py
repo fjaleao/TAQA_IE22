@@ -16,7 +16,7 @@ with sr.AudioFile(AUDIO_FILE) as source:
 
         audio = r.record(source)  # read the entire audio file                  
 
-        text = r.recognize_sphinx(audio, language="en-US")
+        text = r.recognize_google(audio, language="en-US")
 
 with open(f"{filename}.txt", 'w') as f:
     f.write(text)
