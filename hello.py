@@ -18,10 +18,8 @@ with sr.AudioFile(AUDIO_FILE) as source:
         print(text)
 
 #***************************************************************PANDAS ***********************
-df = pd.DataFrame({'mytext': [text]}) #creat data frame
- 
-new_df = df.mytext.str.split(expand=True).stack().value_counts().reset_index() #count words frequency
- 
+df = pd.DataFrame({'mytext': [text]}) #creat data frame 
+new_df = df.mytext.str.split(expand=True).stack().value_counts().reset_index() #count words frequency 
 new_df.columns = ['Word', 'Frequency'] 
  
 #print(new_df.columns)
@@ -50,7 +48,8 @@ doc = nlp(text)
 #print("spacy----------------------------------------------------------------------------------")
 for phrase in doc._.phrases:
  #   print(phrase.text)
-    print(phrase.text,phrase.rank, phrase.count)
+    if(phrase.rank >0.01):
+        print(phrase.text,phrase.rank, phrase.count)
    # print(phrase.chunks)
 #---------------------------------------------------------------------------------
 #---------------------------------------------------------------------------------
