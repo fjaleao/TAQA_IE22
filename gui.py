@@ -81,7 +81,7 @@ window = Tk()
 window.title('Transcripter 5000')
 
 # Set window size
-window.geometry("800x500")
+window.geometry("700x500")
 
 # Set window background color
 window.config(background="white")
@@ -91,19 +91,24 @@ window.config(background="white")
 label_file_explorer = Label(window,
                             text="Select File",
                             width=100, height=3,
-                            fg="red")
+                            fg="red",
+                            justify='center')
 
 
 label_lang = Label(window,
                    text="Select Language",
                    width=100, height=4,
-                   fg="red")
+                   fg="red",
+                   justify='center')
 
 
-label_status = Label(window, text="Status:", width=100, height=4,
-                     fg="red")
+label_status = Label(window, text="Status:",
+                    width=100,
+                    height=4,
+                    fg="red",
+                    justify='center')
 
-vlist = ["English", "Portuguese"]
+vlist = ["English", "Portuguese", "Madeirense"]
 
 combox = ttk.Combobox(window, values=vlist)
 
