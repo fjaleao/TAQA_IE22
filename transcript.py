@@ -12,7 +12,6 @@ def transcript(file, lang, printer):
 
 
     filename, ext = os.path.splitext(file)
-    dir, tail = os.path.split(file)
 
     AUDIO_FILE = f"{filename}.wav"
 
@@ -24,7 +23,7 @@ def transcript(file, lang, printer):
 
     print(text)
 
-    with open(f"{dir}/IO/{tail}", 'w') as f:
+    with open(f"{filename}.txt", 'w') as f:
         f.write(text)
 
     return(text)
