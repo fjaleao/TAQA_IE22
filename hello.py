@@ -4,7 +4,7 @@ import speech_recognition as sr
 from io import StringIO
 
 print("inicio----------------------------------------------------------------------------------")
-filename = "pc_diga5min"
+filename = "input/clip-less"
 
 r = sr.Recognizer()
 
@@ -14,7 +14,7 @@ with sr.AudioFile(AUDIO_FILE) as source:
 
         audio = r.record(source)  # read the entire audio file                  
 
-        text = r.recognize_google(audio, language="pt-pt")
+        text = r.recognize_google(audio, language="en-US")
         print(text)
 
 #***************************************************************PANDAS ***********************
