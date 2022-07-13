@@ -120,28 +120,37 @@ window = Tk()
 # Set window title
 window.title('Great Title')
 
-# Set window size
+# Define window size
 window_width = 700
 window_height = 500
-window.geometry("700x500")
 
 # Set window background color
 window.config(background="white")
 
+# Set window start position - middle of the screen
 screen_width = window.winfo_screenwidth()
 screen_height = window.winfo_screenheight()
-
 center_x = int(screen_width/2 - window_width / 2)
 center_y = int(screen_height/2 - window_height / 2)
 
+# Set window size
 window.geometry(f'{window_width}x{window_height}+{center_x}+{center_y}')
-
-window.state('normal')
 window.resizable(False, False)
 
+# Window state
+window.state('normal')
+
+# Load Critical Software logo
 logo_image = Image.open("cs_logo.jpg").resize((120,63))
 logo_photo = ImageTk.PhotoImage(logo_image)
 
+# Create the frame
+frame = ttk.Frame(window)
+
+# Define common options
+options = {'padx: 5, pady: 5'} #!add more common options
+
+# Create a header Label
 label_header = Label(window,
                     image=logo_photo,
                     background=fromRgb((182, 27, 35)),
