@@ -4,6 +4,7 @@ from asyncore import write
 from curses import window
 import os
 from platform import win32_edition
+from turtle import window_height
 import pandas
 
 # import all components
@@ -113,17 +114,24 @@ window = Tk()
 # Set window title
 window.title('Great Title')
 
-window.minsize(800, 500)
-window.maxsize(800, 500)
-
-
-window.state('normal')
-
 # Set window size
+window_width = 700
+window_height = 500
 window.geometry("700x500")
 
 # Set window background color
 window.config(background="white")
+
+screen_width = window.winfo_screenwidth()
+screen_height = window.winfo_screenheight()
+
+center_x = int(screen_width/2 - window_width / 2)
+center_y = int(screen_height/2 - window_height / 2)
+
+window.geometry(f'{window_width}x{window_height}+{center_x}+{center_y}')
+
+window.state('normal')
+window.resizable(False, False)
 
 
 # Create a File Explorer label

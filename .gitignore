@@ -35,3 +35,4 @@ outputs/clip-pt.txt
 words.txt
 __pycache__/keywords.cpython-310.pyc
 __pycache__/transcript.cpython-310.pyc
+__pycache__/analysis.cpython-310.pyc
