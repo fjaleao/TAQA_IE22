@@ -45,6 +45,8 @@ def Go():
         lang = "en-US"
     elif(combox.get() == "Portuguese"):
         lang = "pt-PT"
+    elif(combox.get() == "Madeirense"):
+        lang = "pt-PT"
 
     label_status.config(text="Status : Processing...")
 
