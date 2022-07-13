@@ -1,7 +1,9 @@
 # Python program to create
 # a file explorer in Tkinter
 from asyncore import write
+from curses import window
 import os
+from platform import win32_edition
 import pandas
 
 # import all components
@@ -13,6 +15,7 @@ from tkinter import ttk
 from tkinter import filedialog
 import tkinter
 from tkinter import messagebox
+from analysis import analysis
 from keywords import keywords
 
 from transcript import transcript
@@ -26,7 +29,7 @@ def openfile():
 
 
 def browseFiles():
-    filename = filedialog.askopenfilename(initialdir=os.getcwd()+"/input",
+    filename = filedialog.askopenfilename(initialdir=os.getcwd()+"/IO",
                                           title="Select a File",
                                           filetypes=(("Audio files",
                                                       "*.mp3*, *.wav*"),
@@ -68,9 +71,39 @@ def Go():
 
     button_analysis.grid(column=1, row=7)
 
+    label_trs.config(text=trs)
+
 
 def showAnalysis():
-	pass
+        
+    txt = label_trs.cget("text")
+    lista = analysis(txt)
+    results = Tk()
+
+    #window.state(newstate='iconic')
+
+    results.geometry("250x500")
+
+    results.title("Results")
+    L1 = Label(results, text="Text")
+    L2 = Label(results, text="Rank")
+    L3 = Label(results, text="Count")
+
+    print("AQUI")
+
+    for i in range(0,len(lista)):
+        print("ENTROU")
+        Lt = Label(results, text=lista(i).texto)
+        Lr = Label(results, text=lista(i).rank)
+        Lc = Label(results, text=lista(i).count)
+        print(Lc)
+
+
+    L1.grid(column=0,row=0)
+    L2.grid(column=1,row=0)
+    L3.grid(column=2,row=0)
+    
+    btn_back = Button(results, text = "Back") 
 
 
 
@@ -78,7 +111,13 @@ def showAnalysis():
 window = Tk()
 
 # Set window title
-window.title('Transcripter 5000')
+window.title('Great Title')
+
+window.minsize(800, 500)
+window.maxsize(800, 500)
+
+
+window.state('normal')
 
 # Set window size
 window.geometry("700x500")
@@ -99,6 +138,7 @@ label_lang = Label(window,
                    width=100, height=4,
                    fg="red")
 
+label_trs = Label(window)
 
 label_status = Label(window, text="Status:",
                     width=100,
@@ -116,7 +156,7 @@ button_explore = Button(window,
                         command=browseFiles)
 
 button_analysis = Button(
-    window, text="Show Analysis Results", command=showAnalysis)
+    window, text="Analyse and Show Results", command=showAnalysis)
 
 button_exit = Button(window,
                      text="Exit",
