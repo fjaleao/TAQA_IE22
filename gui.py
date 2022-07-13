@@ -91,22 +91,19 @@ window.config(background="white")
 label_file_explorer = Label(window,
                             text="Select File",
                             width=100, height=3,
-                            fg="red",
-                            justify='center')
+                            fg="red")
 
 
 label_lang = Label(window,
                    text="Select Language",
                    width=100, height=4,
-                   fg="red",
-                   justify='center')
+                   fg="red")
 
 
 label_status = Label(window, text="Status:",
                     width=100,
                     height=4,
-                    fg="red",
-                    justify='center')
+                    fg="red")
 
 vlist = ["English", "Portuguese", "Madeirense"]
 
