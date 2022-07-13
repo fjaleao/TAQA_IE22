@@ -1,16 +1,24 @@
 import os
 import sys
 from transcript import transcript
+from keywords import keyword_keyBert
+from keywords import keyword_spacy
 
 def merge_txt_splitVideo(numberSplits,file):
 
-    filename = os.path.splitext(file)
+   # filename =  os.getcwd() + "\\IO"  
+    filename, ext = os.path.splitext(file)
     
+    text_total = " "
+
+    for number in range(0, numberSplits+1 ,1):
+     text_total += transcript(("IO/"+str(number) + '_' + file), "pt-PT", 1)
+
     with open(f"{filename}.txt", 'w') as f:
-        for number in range(0,numberSplits,1):
-            #f.write(transcript((str(number) + '_' + file), "pt-PT", 1))
-            print(transcript((str(number) + '_' + file), "pt-PT", 1))
-   
+         f.write(text_total)
     f.close()
-       
-merge_txt_splitVideo(7,"pcdiga_completo")
+    return(text_total)
+
+text = merge_txt_splitVideo(2,"eng") #number of cuts 0,1,2 = 2
+keyword_spacy(text)
+keyword_keyBert(text)
