@@ -3,13 +3,12 @@ import numpy as np
 import os
 import sys
 
-def transcript(file, lang, printer):
+def transcript(file, lang, cut):
     """Outputs transcription of given audio"""
 
     print("Entrou Transcript com filname: " + file)
 
     r = sr.Recognizer()
-
 
     filename, ext = os.path.splitext(file)
 
@@ -22,13 +21,14 @@ def transcript(file, lang, printer):
     text = r.recognize_google(audio, language=lang)
 
     print(text)
-
-    with open(f"{filename}.txt", 'w') as f:
-        f.write(text)
+   
+    if(cut == 0):
+        with open(f"{filename}.txt", 'w') as f:
+         f.write(text)
 
     return(text)
 
 
-if __name__ == "__main__":
-    vf = sys.argv[1]
-    transcript(vf)
+#if __name__ == "__main__":
+ #   vf = sys.argv[1]
+  #  transcript(vf)

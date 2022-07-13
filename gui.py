@@ -48,6 +48,8 @@ def Go():
         lang = "en-US"
     elif(combox.get() == "Portuguese"):
         lang = "pt-PT"
+    elif(combox.get() == "Madeirense"):
+        lang = "pt-PT"
 
     label_status.config(text="Status : Processing...")
 
@@ -118,7 +120,7 @@ window.maxsize(800, 500)
 window.state('normal')
 
 # Set window size
-window.geometry("800x500")
+window.geometry("700x500")
 
 # Set window background color
 window.config(background="white")
@@ -128,20 +130,25 @@ window.config(background="white")
 label_file_explorer = Label(window,
                             text="Select File",
                             width=100, height=3,
-                            fg="red")
+                            fg="red",
+                            justify='center')
 
 
 label_lang = Label(window,
                    text="Select Language",
                    width=100, height=4,
-                   fg="red")
+                   fg="red",
+                   justify='center')
 
 label_trs = Label(window)
 
-label_status = Label(window, text="Status:", width=100, height=4,
-                     fg="red")
+label_status = Label(window, text="Status:",
+                    width=100,
+                    height=4,
+                    fg="red",
+                    justify='center')
 
-vlist = ["English", "Portuguese"]
+vlist = ["English", "Portuguese", "Madeirense"]
 
 combox = ttk.Combobox(window, values=vlist)
 

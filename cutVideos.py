@@ -1,5 +1,7 @@
 from pydub import AudioSegment
 import math
+import os
+import sys
 
 class SplitWavAudioMubin():
     def __init__(self, folder, filename):
@@ -16,7 +18,7 @@ class SplitWavAudioMubin():
         t1 = from_min * 60 * 1000
         t2 = to_min * 60 * 1000
         split_audio = self.audio[t1:t2]
-        split_audio.export(self.folder + '\\' + 'cutVideos'+ '\\' + split_filename, format="wav")
+        split_audio.export(self.folder +  '\\' + split_filename, format="wav")
         
     def multiple_split(self, min_per_split):
         total_mins = math.ceil(self.get_duration() / 60)
@@ -28,7 +30,7 @@ class SplitWavAudioMubin():
                 print('All splited successfully')
                 return i
 
-folder = 'D:\IE2022\TAQA_IE22'
-file = 'pcdiga_completo.wav'
+file = 'eng.wav'
+folder = os.getcwd()+ "\\IO" 
 split_wav = SplitWavAudioMubin(folder,file)
 print(split_wav.multiple_split(min_per_split=1))
