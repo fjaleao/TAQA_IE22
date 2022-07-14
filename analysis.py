@@ -21,7 +21,7 @@ def analysis(text):
     for phrase in doc._.phrases:
         #   print(phrase.text)
         if(phrase.rank > 0.01):
-            list_aux.append(phrase)
+            list_aux.append("Text: " + str(phrase.text) + "\t Rank: "+ str(phrase.rank) + "\t Count: " + str(phrase.count))
             print(phrase.text, phrase.rank, phrase.count)
     # print(phrase.chunks)
     # ---------------------------------------------------------------------------------

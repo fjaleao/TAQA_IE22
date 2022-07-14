@@ -11,10 +11,10 @@ def converter_to_wav(file, output_ext="wav"):
     that uses `ffmpeg` under the hood"""
 
     filename, ext = os.path.splitext(file)
-    if(ext=='mp4'):
+    if(ext=='.mp4'):
         clip = VideoFileClip(file)
         clip.audio.write_audiofile(f"{filename}.{output_ext}")
-    elif(ext=='mp3'):
+    elif(ext=='.mp3'):
         sound = AudioSegment.from_mp3(file)
         sound.export(filename, format="wav") 
 

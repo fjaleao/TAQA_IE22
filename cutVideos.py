@@ -7,7 +7,7 @@ class SplitWavAudioMubin():
     def __init__(self, folder, filename):
         self.folder = folder
         self.filename = filename
-        self.filepath = folder + '\\' + filename
+        self.filepath = folder + '/' + filename
         
         self.audio = AudioSegment.from_wav(self.filepath)
     
@@ -18,7 +18,7 @@ class SplitWavAudioMubin():
         t1 = from_min * 60 * 1000
         t2 = to_min * 60 * 1000
         split_audio = self.audio[t1:t2]
-        split_audio.export(self.folder +  '\\' + split_filename, format="wav")
+        split_audio.export(self.folder +  '/' + split_filename, format="wav")
         
     def multiple_split(self, min_per_split):
         total_mins = math.ceil(self.get_duration() / 60)
@@ -30,7 +30,7 @@ class SplitWavAudioMubin():
                 print('All splited successfully')
                 return i
 
-file = 'eng.wav'
-folder = os.getcwd()+ "\\IO" 
-split_wav = SplitWavAudioMubin(folder,file)
-print(split_wav.multiple_split(min_per_split=1))
+#file = 'eng.wav'
+#folder = os.getcwd()+ "\\IO" 
+#split_wav = SplitWavAudioMubin(folder,file)
+#print(split_wav.multiple_split(min_per_split=1))
