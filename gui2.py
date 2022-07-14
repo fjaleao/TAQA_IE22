@@ -18,6 +18,11 @@ from tkinter import ttk
 # import filedialog module
 from tkinter import filedialog
 from tkinter import messagebox
+from analysis import analysis
+from converter_to_wav import converter_to_wav
+from keywords import keywords
+from cutVideos import SplitWavAudioMubin
+from looper import merge_txt_splitVideo
 
 from yaml import parse
 from analysis import analysis
@@ -67,14 +72,34 @@ def Go():
         lang = "en-US"
     elif(combox.get() == "Portuguese"):
         lang = "pt-PT"
-    elif(combox.get() == "Madeirense"): # props ao hugo
+    elif(combox.get() == "Madeirense"):
         lang = "pt-PT"
+
+    file = label_file_explorer.cget("text")
+    print(file)
+
+    filename, ext = os.path.splitext(file)
+
+    print(filename)
+
+    if (ext != '.wav'):
+        label_status.config(text="Status : Converting to WAV format...")
+        window.update_idletasks()
+        converter_to_wav(file)
+
 
     label_status.config(text="Status : Processing...")
 
     window.update_idletasks()
 
-    trs = transcript(label_file_explorer.cget("text"), lang, 1)
+    dir, tail = os.path.split(filename) 
+
+    split_wav = SplitWavAudioMubin(dir,f"{tail}.wav")
+    num_cortes = split_wav.multiple_split(min_per_split=1)
+
+    trs = merge_txt_splitVideo(num_cortes,tail, lang)
+
+    #trs = transcript(f"{filename}"+".wav", lang, 1)
 
     label_status.config(text="Status : Finished")
 
@@ -84,6 +109,9 @@ def Go():
 
     with open("words.txt", "w") as f:
         f.write(wcount)
+
+    with open("transcription.txt", "w") as f:
+        f.write(trs)
 
     messagebox.showinfo(
         "Title", "The word statistics have been written to file words.txt")
