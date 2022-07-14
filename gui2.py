@@ -144,29 +144,37 @@ window.state('normal')
 logo_image = Image.open("cs_logo.jpg").resize((120,63))
 logo_photo = ImageTk.PhotoImage(logo_image)
 
-# Create the frame
-frame = ttk.Frame(window)
+# Frame creation
+frame = Frame(window)
 
-# Define common options
-options = {'padx: 5, pady: 5'} #!add more common options
+# Define common options for form fields
+options = {'padx': 5, 'pady': 5} #!add more common options
 
-# Create a header Label
+# Header Background label
+label_headBg = Label(window,
+                    background=fromRgb((182, 27, 35)),
+                    width=100, height=4)
+label_headBg.grid(column=1, row=1, **options)
+
+# Header label
 label_header = Label(window,
                     image=logo_photo,
-                    background=fromRgb((182, 27, 35)),
+                    # background=fromRgb((182, 27, 35)),
                     
                     )
+label_header.grid(column=1, row=1, **options)
 
-
-# Create a File Explorer label
+# File Explorer label
 label_file_explorer = Label(window,
                             text="Select File",
-                            width=40, height=3,
-                            fg="red",
+                            # width=40, height=4,
+                            fg="white",
                             font=('Arial', 15),
-                            background='white')
+                            # background=
+                            )
+label_file_explorer.grid(column=1, row=1)
 
-
+# Language label
 label_lang = Label(window,
                    text="Select Language",
                    width=100, height=4,
@@ -174,10 +182,12 @@ label_lang = Label(window,
 
 label_trs = Label(window)
 
+# Status label
 label_status = Label(window, text="Status:",
                     width=100,
                     height=4,
                     fg="red")
+                    
 
 vlist = ["English", "Portuguese", "Madeirense"]
 
@@ -202,9 +212,7 @@ button_exit = Button(window,
 # in a table like structure by
 # specifying rows and columns
 
-label_header.grid(column=1, row=1)
 
-label_file_explorer.grid(column=1, row=2)
 
 button_explore.grid(column=1, row=3)
 
