@@ -1,11 +1,7 @@
 # Python program to create
 # a file explorer in Tkinter
-from asyncore import write
-from curses import window
 import os
-from platform import win32_edition
-from turtle import window_height
-import pandas
+from threading import Thread
 
 # import all components
 # from the tkinter library
@@ -17,7 +13,10 @@ from tkinter import ttk
 from tkinter import filedialog
 from tkinter import messagebox
 from analysis import analysis
+from converter_to_wav import converter_to_wav
 from keywords import keywords
+from cutVideos import SplitWavAudioMubin
+from looper import merge_txt_splitVideo
 
 from transcript import transcript
 
@@ -25,7 +24,6 @@ from PIL import Image, ImageTk
 
 # Function for opening the
 # file explorer window
-
 
 def openfile():
     return filedialog.askopenfilename()
@@ -58,11 +56,31 @@ def Go():
     elif(combox.get() == "Madeirense"):
         lang = "pt-PT"
 
+    file = label_file_explorer.cget("text")
+    print(file)
+
+    filename, ext = os.path.splitext(file)
+
+    print(filename)
+
+    if (ext != '.wav'):
+        label_status.config(text="Status : Converting to WAV format...")
+        window.update_idletasks()
+        converter_to_wav(file)
+
+
     label_status.config(text="Status : Processing...")
 
     window.update_idletasks()
 
-    trs = transcript(label_file_explorer.cget("text"), lang, 1)
+    dir, tail = os.path.split(filename) 
+
+    split_wav = SplitWavAudioMubin(dir,f"{tail}.wav")
+    num_cortes = split_wav.multiple_split(min_per_split=1)
+
+    trs = merge_txt_splitVideo(num_cortes,tail, lang)
+
+    #trs = transcript(f"{filename}"+".wav", lang, 1)
 
     label_status.config(text="Status : Finished")
 
@@ -73,6 +91,9 @@ def Go():
     with open("words.txt", "w") as f:
         f.write(wcount)
 
+    with open("transcription.txt", "w") as f:
+        f.write(trs)
+
     messagebox.showinfo(
         "Title", "The word statistics have been written to file words.txt")
 
@@ -82,35 +103,18 @@ def Go():
 
 
 def showAnalysis():
-        
+
     txt = label_trs.cget("text")
     lista = analysis(txt)
-    results = Tk()
 
-    #window.state(newstate='iconic')
+    my_string = ""
 
-    results.geometry("250x500")
-
-    results.title("Results")
-    L1 = Label(results, text="Text")
-    L2 = Label(results, text="Rank")
-    L3 = Label(results, text="Count")
-
-    print("AQUI")
-
-    for i in range(0,len(lista)):
-        print("ENTROU")
-        Lt = Label(results, text=lista(i).texto)
-        Lr = Label(results, text=lista(i).rank)
-        Lc = Label(results, text=lista(i).count)
-        print(Lc)
-
-
-    L1.grid(column=0,row=0)
-    L2.grid(column=1,row=0)
-    L3.grid(column=2,row=0)
+    for i in lista:
+        my_string += str(i)+"\n"
     
-    btn_back = Button(results, text = "Back") 
+
+    with open("keywords.txt", "w") as f:
+        f.write(my_string)
 
 
 
