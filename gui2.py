@@ -52,9 +52,6 @@ def browseFiles():
     label_file_explorer.configure(text=filename, font=('Arial', 8))
     button_explore.configure(text="Change File")
 
-    # if(label_file_explorer.get() != None):
-    #     print("devia estar a mostrar alguma cena")
-    #     showLanguageRow()
     if(label_file_explorer.cget("text") != ""):
         showLanguageRow()
     else:
@@ -98,8 +95,6 @@ def Go():
 
     trs = merge_txt_splitVideo(num_cortes,tail, lang)
 
-    #trs = transcript(f"{filename}"+".wav", lang, 1)
-
     label_status.config(text="Status : Finished")
 
     wcount = keywords(trs).to_string()
@@ -126,8 +121,6 @@ def showAnalysis():
     lista = analysis(txt)
     results = Tk()
 
-    #window.state(newstate='iconic')
-
     results.geometry("250x500")
 
     results.title("Results")
@@ -135,10 +128,7 @@ def showAnalysis():
     L2 = Label(results, text="Rank")
     L3 = Label(results, text="Count")
 
-    # print("AQUI")
-
     for i in range(0,len(lista)):
-        # print("ENTROU")
         Lt = Label(results, text=lista(i).texto)
         Lr = Label(results, text=lista(i).rank)
         Lc = Label(results, text=lista(i).count)
@@ -188,19 +178,19 @@ def changeWindow():
 
     button_go.grid_forget()
 
-    # result_basic_image = Image.open("imagecoreTopic.jpeg")
-    # result_basic_photo = ImageTk.PhotoImage(result_basic_image)
+    result_basic_image = Image.open("imagecoreTopic.jpeg")
+    result_basic_photo = ImageTk.PhotoImage(result_basic_image)
 
-    # result_detailed_image = Image.open("imageHighdiversity.jpg")
-    # result_detailed_photo = ImageTk.PhotoImage(result_detailed_image)
+    result_detailed_image = Image.open("imageHighdiversity.jpg")
+    result_detailed_photo = ImageTk.PhotoImage(result_detailed_image)
 
     basic='basic'
     detailed='detailed'
 
     label_result_image = Label(window,
-                    # image=result_basic_photo,
-                    text=basic,
-                    width=4, height=2,
+                    image=result_basic_photo,
+                    # text=basic,
+                    # width=4, height=2,
                     **options
                     )
     label_result_image.grid(column=1, row=3)
@@ -208,12 +198,12 @@ def changeWindow():
     label_spacer2.grid(column=1, row=4)
 
     def switch_to_detailed():
-        label_result_image.config(text=detailed)#image=result_detailed_photo
+        label_result_image.config(image=result_detailed_photo)#text=detailed
         button_to_detailed.grid_forget()
         button_to_basic.grid(column=1, row=5, sticky='S', **button_options)
 
     def switch_to_basic():
-        label_result_image.config(text=basic)#image=result_basic_photo
+        label_result_image.config(image=result_basic_photo)#text=basic
         button_to_basic.grid_forget()
         button_to_detailed.grid(column=1, row=5, sticky='S', **button_options)
 
