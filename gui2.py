@@ -224,6 +224,17 @@ def changeWindow():
                             **button_options
                             )
 
+    def restart():
+        pass
+
+    button_restart = Button(window,
+                            text="Restart",
+                            font=('Arial', 15),
+                            fg=fromRgb((182, 27, 35)),
+                            command=restart(),
+                            **button_options
+                            )
+
 
 # Create the root window
 window = Tk()
@@ -359,11 +370,6 @@ button_go.grid(column=1, row=7)
 label_spacer5.grid(column=1, row=8)
 
 label_status.grid(column=1, row=9)
-
-#todo
-
-# def init():
-    
 
 
 # Let the window wait for any events
