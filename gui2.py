@@ -50,7 +50,6 @@ def browseFiles():
 
     # Change label contents
     label_file_explorer.configure(text=filename, font=('Arial', 8))
-    button_analysis.grid_remove()
     button_explore.configure(text="Change File")
 
     # if(label_file_explorer.get() != None):
@@ -116,9 +115,9 @@ def Go():
     messagebox.showinfo(
         "Title", "The word statistics have been written to file words.txt")
 
-    button_analysis.grid(column=1, row=7)
-
     label_trs.config(text=trs)
+
+    changeWindow()
 
 
 def showAnalysis():
@@ -155,28 +154,85 @@ def showAnalysis():
 def showLanguageRow():
     label_lang.grid(column=1, row=5, sticky='W', **options)
     combox.grid(column=1, row=5)
-    label_spacer3.forget()
+    label_spacer3.grid_forget()
 
 def hideLanguageRow():
     label_spacer3.grid(column=1, row=5)
-    label_lang.forget()
-    combox.forget()
+    label_lang.grid_forget()
+    combox.grid_forget()
 
 def showTranscriptButton(event):
-    print("botaum")
-    # button_go.forget_grid()
-    button_go = Button(window,
-                    text="Transcript",
-                    font=('Arial, 30'),
+    print('butaum')
+    button_go.config(font=('Arial, 30'),
                     fg=fromRgb((182, 27, 35)),
-                    # width=40, height=4,
-                    command=Go,
-                    **button_options
+                    state='active'
                     )
     button_go.grid(column=1, row=7)
 
-#! def changeWindow():
 
+def changeWindow():
+
+    button_explore.grid_forget()
+    label_file_explorer.grid_forget()
+
+    label_spacer2.grid_forget()
+
+    label_lang.grid_forget()
+    combox.grid_forget()
+
+    label_spacer4.grid_forget()
+
+    label_spacer5.grid_forget()
+
+    label_status.grid_forget()
+
+    button_go.grid_forget()
+
+    # result_basic_image = Image.open("imagecoreTopic.jpeg")
+    # result_basic_photo = ImageTk.PhotoImage(result_basic_image)
+
+    # result_detailed_image = Image.open("imageHighdiversity.jpg")
+    # result_detailed_photo = ImageTk.PhotoImage(result_detailed_image)
+
+    basic='basic'
+    detailed='detailed'
+
+    label_result_image = Label(window,
+                    # image=result_basic_photo,
+                    text=basic,
+                    width=4, height=2,
+                    **options
+                    )
+    label_result_image.grid(column=1, row=3)
+
+    label_spacer2.grid(column=1, row=4)
+
+    def switch_to_detailed():
+        label_result_image.config(text=detailed)#image=result_detailed_photo
+        button_to_detailed.grid_forget()
+        button_to_basic.grid(column=1, row=5, sticky='S', **button_options)
+
+    def switch_to_basic():
+        label_result_image.config(text=basic)#image=result_basic_photo
+        button_to_basic.grid_forget()
+        button_to_detailed.grid(column=1, row=5, sticky='S', **button_options)
+
+    button_to_detailed = Button(window,
+                                text="Click for Detailed Version",
+                                font=('Arial', 15),
+                                fg=fromRgb((182, 27, 35)),
+                                command=switch_to_detailed,
+                                **button_options
+                                )
+    button_to_detailed.grid(column=1, row=5, sticky='S', **button_options)
+
+    button_to_basic = Button(window,
+                            text="Click for Basic Version",
+                            font=('Arial', 15),
+                            fg=fromRgb((182, 27, 35)),
+                            command=switch_to_basic,
+                            **button_options
+                            )
 
 
 # Create the root window
@@ -206,7 +262,7 @@ window.resizable(False, False)
 window.state('normal')
 
 # Load Critical Software logo
-logo_image = Image.open("cs_logo.jpg") #!removed resize
+logo_image = Image.open("cs_logo.jpg")
 logo_photo = ImageTk.PhotoImage(logo_image)
 
 # Frame creation
@@ -254,11 +310,12 @@ label_lang = Label(window,
 label_trs = Label(window)
 
 # Dummy Transcript label
-button_go = Label(window,
+button_go = Button(window,
                     text="Transcript",
                     font=('Arial, 30'),
                     fg="white",
-                    background="grey",
+                    state='disabled',
+                    command=Go,
                     **button_options
                     )
 
@@ -283,12 +340,6 @@ button_explore = Button(window,
                         text="Browse Files",
                         fg=fromRgb((182, 27, 35)),
                         command=browseFiles,
-                        **button_options
-                        )
-
-button_analysis = Button(window,
-                        text="Analyse and Show Results",
-                        command=showAnalysis,
                         **button_options
                         )
 
